@@ -28,22 +28,22 @@ First, we provision the kubernetes cluster using eksctl. See Project-22.
 
 Create the cluster
 ```
- eksctl create cluster --name ola-eks-tooling --region us-west-2 --nodegroup-name worker --node-type t3.medium --nodes 2
+eksctl create cluster --name ola-eks-tooling --region us-west-2 --nodegroup-name worker --node-type t3.medium --nodes 2
 ```
 ![alt text](images/25.1.png)
 ![alt text](images/25.2.png)
-![alt text](images/26.3.png)
+![alt text](images/25.3.png)
 
 Create kubeconfig file using awscli and connect to the kubectl.
-    ```
-    aws eks update-kubeconfig --name ola-eks-tooling --region us-west-2
-    ```
+```
+aws eks update-kubeconfig --name ola-eks-tooling --region us-west-2
+```
 
 Create a namespace tools where all the DevOps tools will be deployed. We will also be deploying jenkins from the previous project in this namespace.
-    ```
-    kubectl create ns tools
-    ```
-![alt text](images/26.4.png)
+```
+kubectl create ns tools
+```
+![alt text](images/25.4.png)
 
 **Create EBS-CSI Driver for the Cluster**
 
@@ -71,7 +71,7 @@ Run the command to see the pods in the kube-system namespace
 ```
 kubectl get pods -n kube-system
 ```
-![alt text](images/26.5.png)
+![alt text](images/25.5.png)
 
 By running this command, you will observe the presence of coredns, kube-proxy, and aws-nodes.
 
@@ -83,10 +83,19 @@ Use this command to check the necessary platform version.
 ```
 aws eks describe-addon-versions --addon-name aws-ebs-csi-driver
 ```
+![alt text](images/25.6.png)
 
-You might already have an **AWS IAM OpenID Connect (OIDC)** provider for your cluster. To confirm its existence or establish a new one, check the **OIDC issuer URL** linked to your cluster. An **IAM OIDC** provider is necessary for utilizing IAM roles with service accounts. You can set up an IAM OIDC provider for your cluster using either eksctl or the AWS Management Console.
+from the above we can see the platform version
+```
+ "addonVersion": "v1.30.0-eksbuild.1",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+```
 
-To create an **IAM OIDC** identity provider for your cluster with eksctl
+You might already have an **AWS IAM OpenID Connect (OIDC)** provider for your cluster. To confirm its existence or establish a new one, check the **OIDC issuer URL** linked to your cluster. An **IAM OIDC** provider is necessary for utilizing IAM roles with service accounts. You can set up an IAM OIDC provider for your cluster using either **eksctl**** or the **AWS Management Console**.
+
+To create an **IAM OIDC** identity provider for your cluster with **eksctl**
 
 Determine the OIDC issuer ID for your cluster.
 
@@ -100,6 +109,7 @@ oidc_id=$(aws eks describe-cluster --name $cluster_name --region us-west-2 --que
 ```
 echo $oidc_id
 ```
+![alt text](images/25.7.png)
 
 Check if there's an **IAM OIDC** provider in your account that matches your cluster's issuer ID.
 ```
@@ -110,12 +120,17 @@ If output is returned, then you already have an IAM OIDC provider for your clust
 
 In this case, no output was returned.
 
+![alt text](images/25.8.png)
+
 Create an **IAM OIDC**** identity provider for your cluster with the following command
+```
 eksctl utils associate-iam-oidc-provider --cluster $cluster_name --region us-west-2 --approve
+```
+![alt text](images/25.9.png)
 
-Configuring a Kubernetes service account to assume an IAM role
+### Configuring a Kubernetes service account to assume an IAM role
 
-Create a file aws-ebs-csi-driver-trust-policy.json that includes the permissions for the AWS services
+**Create a file aws-ebs-csi-driver-trust-policy.json that includes the permissions for the AWS services**
 
 ```
 cat >aws-ebs-csi-driver-trust-policy.json <<EOF
@@ -139,3 +154,20 @@ cat >aws-ebs-csi-driver-trust-policy.json <<EOF
 }
 EOF
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9917FDA7F48553628790FB345659305D

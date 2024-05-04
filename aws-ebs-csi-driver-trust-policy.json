@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::992382761454:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/9917FDA7F48553628790FB345659305D"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-west-2.amazonaws.com/id//Users/olaminiyi/Documents/25.Deploying and Packaging Applications into Kubernetes with Helm/9917FDA7F48553628790FB345659305Dud": "sts.amazonaws.com",
+          "oidc.eks.us-west-2.amazonaws.com/id/9917FDA7F48553628790FB345659305Dbe-system:ebs-csi-controller-sa"
+        }
+      }
+    }
+  ]
+}
