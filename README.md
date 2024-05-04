@@ -133,7 +133,6 @@ eksctl utils associate-iam-oidc-provider --cluster $cluster_name --region us-wes
 **Create a file aws-ebs-csi-driver-trust-policy.json that includes the permissions for the AWS services**
 
 ```
-cat >aws-ebs-csi-driver-trust-policy.json <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -152,15 +151,32 @@ cat >aws-ebs-csi-driver-trust-policy.json <<EOF
     }
   ]
 }
-EOF
 ```
 
+This trust policy essentially allows the **EBS CSI** driver to assume the role associated with the specified OIDC provider and access AWS resources on behalf of the EBS CSI controller service account
 
+Create the role - **AmazonEKS_EBS_CSI_DriverRole**
+```
+aws iam create-role \
+  --role-name AmazonEKS_EBS_CSI_DriverRole \
+  --assume-role-policy-document file://"aws-ebs-csi-driver-trust-policy.json"
+```
+Attach a policy. AWS maintains an AWS managed policy or you can create your own custom policy. Attach the AWS managed policy to the role.
+```
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+![alt text](images/25.10.png)
 
+To add the Amazon **EBS CSI add-on** using the **AWS CLI**
 
-
-
-
+Run the following command.
+```
+aws eks create-addon --cluster-name $cluster_name --addon-name aws-ebs-csi-driver \
+  --service-account-role-arn arn:aws:iam::992382761454:role/AmazonEKS_EBS_CSI_DriverRole --region us-west-2
+```
+![alt text](images/25.11.png)
 
 
 
