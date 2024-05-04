@@ -178,8 +178,31 @@ aws eks create-addon --cluster-name $cluster_name --addon-name aws-ebs-csi-drive
 ```
 ![alt text](images/25.11.png)
 
+Execute the command, you will find the ebs-csi driver related pods available.
+```
+kubectl get pods -n kube-system
+```
+![alt text](images/25.12.png)
 
+### Installing the tools in kubernetes
 
+The best approach to easily get tools into kubernetes is to use helm.
+
+Install jenkins in the namespace tools using helm
+
+Search for an official helm chart for jenkins on Artifact Hub.
+```
+helm repo add jenkins https://charts.jenkins.io
+```
+```
+helm repo update
+```
+```
+helm upgrade --install jenkins jenkins/jenkins -n tools
+```
+![alt text](images/25.13.png)
+
+**Note:** I have added Jenkins in my previuos project that was the reason it was showing **"jenkins" already exists with the same configuration, skipping**
 
 
 
