@@ -205,7 +205,7 @@ Search for an official helm chart for Artifactory on [Artifact Hub](https://arti
 
 ![alt text](images/25.15.png)
 
-Click on install to display the commands for installation. on the right hand side of the page
+**Click** on install to display the commands for installation. on the right hand side of the page
 
 ![alt text](images/25.16.png)
 ![alt text](images/25.18.png)
@@ -224,7 +224,7 @@ helm upgrade --install artifactory jfrog/artifactory --version 107.71.4 -n tools
 ```
 ![alt text](images/25.17.png)
 
-We opted for the **upgrade --install** flag over **helm install** artifactory jfrog/artifactory for enhanced best practices, especially in CI pipeline development for helm deployments. This approach guarantees that helm performs an upgrade if an installation exists. In the absence of an existing installation, it conducts the initial install. This strategy assures a fail-safe command; it intelligently discerns whether an upgrade or a fresh installation is needed, preventing failures.
+We opted for the **upgrade --install** flag over **helm install** artifactory jfrog/artifactory for enhanced best practices, especially in **CI pipeline development for helm deployments**. This approach guarantees that helm performs an upgrade if an installation exists. In the absence of an existing installation, it conducts the initial install. This strategy assures a fail-safe command; it intelligently discerns whether an upgrade or a fresh installation is needed, preventing failures.
 
 To see the various versions; scrow down and check the right side of the page and click on see all link
 
@@ -233,7 +233,7 @@ To see the various versions; scrow down and check the right side of the page and
 
 **Getting the Artifactory URL**
 
-The artifactory helm chart comes bundled with the Artifactory software, a PostgreSQL database and an Nginx proxy which it uses to configure routes to the different capabilities of Artifactory. Getting the pods after some time, you should see something like the below.
+The artifactory helm chart comes bundled with the `Artifactory software`, a `PostgreSQL database` and an `Nginx proxy` which it uses to configure routes to the different capabilities of Artifactory. Getting the pods after some time, you should see something like the below.
 ```
 kubectl get pods -n tools -w
 ```
@@ -241,7 +241,7 @@ kubectl get pods -n tools -w
 
 Each of the deployed application have their respective services. This is how you will be able to reach either of them.
 
-Notice that, the Nginx Proxy has been configured to use the service type of LoadBalancer. Therefore, to reach Artifactory, we will need to go through the Nginx proxy's service. Which happens to be a load balancer created in the cloud provider.
+Notice that, the `Nginx Proxy` has been configured to use the service type of `LoadBalancer`. Therefore, to reach Artifactory, we will need to go through the `Nginx proxy's service`. Which happens to be a load balancer created in the cloud provider.
 ```
 kubectl get svc -n tools
 ```
@@ -326,7 +326,7 @@ spec:
 
 ```
 
-- An Ingress needs apiVersion, kind, metadata and spec fields
+- An Ingress needs **apiVersion, kind, metadata and spec fields**
 - The name of an Ingress object must be a valid DNS subdomain name
 - Ingress frequently uses annotations to configure some options depending on the Ingress controller.
 - Different Ingress controllers support different annotations. Therefore it is important to be up to date with the ingress controller's specific documentation to know what annotations are supported.
@@ -822,14 +822,15 @@ kubectl get certificate -n tools
 > After applying the above command, i ran into some issues, my certicate remains in pending state.
 > ![alt text](images/25.66.png)
 
-During investigation on the challenge resource, I noticed a permission issue
+**During investigation on the challenge resource, I noticed a permission issue**
 ```
 kubectl describe challenge tooling.artifactory.olami.uk-1-3686652334-1442975272 -n tools
 ```
 
 ![alt text](images/25.67.png)
 
-This means that there is an issue with presenting a challenge due to a permissions error related to Route 53 in AWS. The error indicates that the IAM role being assumed (eksctl-ola-eks-tooling2-nodegroup--NodeInstanceRole-znPcc1f2R8go/i-09dfdcc872addf2fa ) does not have the necessary permissions to perform the route53:ChangeResourceRecordSets action on the specified hosted zone (Z07846632EVOFYUZSWK8F).
+> [!NOTE]
+> This means that there is an issue with presenting a challenge due to a permissions error related to Route 53 in AWS. The error indicates that the IAM role being assumed (eksctl-ola-eks-tooling2-nodegroup--NodeInstanceRole-znPcc1f2R8go/i-09dfdcc872addf2fa ) does not have the necessary permissions to perform the route53:ChangeResourceRecordSets action on the specified hosted zone (Z07846632EVOFYUZSWK8F).
 
 
 **Resolution**
