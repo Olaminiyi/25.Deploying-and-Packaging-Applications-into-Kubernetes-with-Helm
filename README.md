@@ -1,4 +1,5 @@
-# 25.Deploying and Packaging Applications into Kubernetes with Helm
+# Project 25
+# Deploying and Packaging Applications into Kubernetes with Helm
 
 In [Project-24](https://github.com/Olaminiyi/24.Setting-up-EKS-with-Terraform-Deploying-Jenkins-Server-using-Helm), we acquired practical skills in using `Helm` to deploy applications on Kubernetes.
 
