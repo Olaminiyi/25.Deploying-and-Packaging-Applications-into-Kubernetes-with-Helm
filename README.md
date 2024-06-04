@@ -973,7 +973,7 @@ cat values.yaml
 
 ![alt text](images/25.80.png)
 
-Replace the LoadBalancer created for artifactory with ClusterIP
+**Replace the LoadBalancer created for artifactory with ClusterIP**
 
 ```
 helm upgrade artifactory jfrog/artifactory --set nginx.service.type=ClusterIP,databaseUpgradeReady=true -n tools
