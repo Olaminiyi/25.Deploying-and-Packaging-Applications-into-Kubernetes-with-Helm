@@ -235,6 +235,12 @@ To see the various versions; scrow down and check the right side of the page and
 **Getting the Artifactory URL**
 
 The artifactory helm chart comes bundled with the `Artifactory software`, a `PostgreSQL database` and an `Nginx proxy` which it uses to configure routes to the different capabilities of Artifactory. Getting the pods after some time, you should see something like the below.
+
+> [!NOTE]
+> After installing artifactory with helm, I faced an error due to the artifactory pods been in the pending mode.
+> After investigation using the `describe pod` method, I was getting the error message below
+> **"running PreBind plugin "VolumeBinding": binding volumes: context deadline exce"**
+> The issue was a result of the `EBS_CSI_DriverRole` that was not created properly. The `oidc_id` was not passing the actual value to the policy required for the creation of the `EBS_CSI_DriverRole`. The interpolation method to pass the value of `oidc_id` was changed from `$oidc_id` to `{oidc_id}`. This resolved the issue
 ```
 kubectl get pods -n tools -w
 ```
