@@ -508,6 +508,7 @@ To establish a Route53 record, navigate to the hosted zone where essential DNS r
 If opting for the CNAME Method,
 
 - Choose the desired HOSTED ZONE.
+- Put the Loadbalancer address in the `value- text box`
 - Click on the "Create Record" button to proceed.
 
 ![alt text](images/25.41.png)
