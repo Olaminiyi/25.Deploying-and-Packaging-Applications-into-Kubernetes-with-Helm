@@ -314,7 +314,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "tooling.artifactory.dybran.com"
+  - host: "tooling.artifactory.olami.uk"
     http:
       paths:
       - path: /
