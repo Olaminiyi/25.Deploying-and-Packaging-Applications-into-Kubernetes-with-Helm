@@ -458,7 +458,6 @@ spec:
               number: 8082
 EOF
 ```
-![alt text](images/25.35.png)
 
 Create the ingress resource in the tools namespace
 ```
@@ -809,8 +808,8 @@ The other section is tls where the host name that will require https is specifie
 ```
   tls:
   - hosts:
-    - "tooling.artifactory.dybran.com"
-    secretName: "tooling.artifactory.dybran.com"
+    - "tooling.artifactory.olami.uk"
+    secretName: "tooling.artifactory.olami.uk"
 ```
 Redeploying the newly updated ingress will go through the process as shown below.
 
