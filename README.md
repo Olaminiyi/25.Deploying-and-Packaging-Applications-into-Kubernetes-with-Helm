@@ -705,7 +705,7 @@ aws route53 list-hosted-zones
 ![alt text](images/25.61.png)
 
 
-Update the yaml file.
+Update the yaml file with the correct Hosted Zone ID.
 
 ```
 cat <<EOF > cluster-issuer.yaml
