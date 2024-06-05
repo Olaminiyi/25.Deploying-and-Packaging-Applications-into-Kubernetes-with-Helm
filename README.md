@@ -511,6 +511,10 @@ If opting for the CNAME Method,
 - Put the Loadbalancer address in the `value- text box`
 - Click on the "Create Record" button to proceed.
 
+**AWS Alias Method**
+
+In the create record section, type in the record name, and toggle the alias button to enable an alias. An alias is of A DNS record type which basically routes directly to the load balancer. In the choose endpoint bar, select Alias to Application and Classic Load Balancer.
+
 ![alt text](images/25.41.png)
 
 Please verify the DNS record's successful propagation. Go to [DNS checker](https://dnschecker.org/) and choose CNAME to check the record. Make sure there are green ticks next to each location on the left-hand side. Please note that it may take some time for the changes to propagate.
@@ -524,9 +528,7 @@ nslookup -type=ns tooling.artifactory.olami.uk
 ![alt text](images/25.43.png)
 
 
-**AWS Alias Method**
 
-In the create record section, type in the record name, and toggle the alias button to enable an alias. An alias is of A DNS record type which basically routes directly to the load balancer. In the choose endpoint bar, select Alias to Application and Classic Load Balancer.
 
 **Accessing the application from the browser**
 
