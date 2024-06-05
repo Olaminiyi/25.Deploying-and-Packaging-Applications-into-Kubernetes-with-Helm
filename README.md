@@ -241,6 +241,12 @@ The artifactory helm chart comes bundled with the `Artifactory software`, a `Pos
 > After investigation using the `describe pod` method, I was getting the error message below
 > **"running PreBind plugin "VolumeBinding": binding volumes: context deadline exce"**
 > The issue was a result of the `EBS_CSI_DriverRole` that was not created properly. The `oidc_id` was not passing the actual value to the policy required for the creation of the `EBS_CSI_DriverRole`. The interpolation method to pass the value of `oidc_id` was changed from `$oidc_id` to `{oidc_id}`. This resolved the issue
+
+Renamed the project directory to a shorter name to make it more comprehensible and to follow naming convention standard. **You may not need to do this if you didn't named your project directory with a long name like mine**
+```
+mv 25.Deploying and Packaging Applications into Kubernetes with Helm  Deploy
+```
+
 ```
 kubectl get pods -n tools -w
 ```
