@@ -25,7 +25,7 @@ Then
 
 In this project, the requirement is to use Jfrog Artifactory as a private registry for the organisation's Docker images and Helm charts. This requirement will satisfy part of the company's corporate security policies to never download artifacts directly from the public into production systems. We will eventually have a CI pipeline that initially pulls public docker images and helm charts from the internet, store in artifactory and scan the artifacts for security vulnerabilities before deploying into the corporate infrastructure. Any found vulnerabilities will immediately trigger an action to quarantine such artifacts.
 
-### Deploy Jfrog Artifactory into Kubernetes
+### Deploy Jfrog Artifactory into Kubernetes.
 
 First, we provision the kubernetes cluster using eksctl. See [Project-22](https://github.com/Olaminiyi/22.Deploying-application-into-Kubernetes-Cluster).
 
