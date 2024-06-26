@@ -183,7 +183,7 @@ aws iam attach-role-policy \
 
 ![alt text](<images/Screenshot 2024-06-03 at 12.14.47.png>)
 
-To add the Amazon **EBS CSI add-on** using the **AWS CLI**
+To add the Amazon **EBS CSI add-on** using the **AWS CLI**.
 
 Run the following command.
 ```
